@@ -59,3 +59,31 @@ function populateChart(data) {
       },
     },
   });
+  let barChart = new Chart(bar, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Pounds',
+          data: pounds,
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Pounds Lifted (Last 7 days)',
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    },
+  });
+}
