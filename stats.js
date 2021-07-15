@@ -25,4 +25,37 @@ function populateChart(data) {
   const labels = data.map(({ day }) => {
     const date = new Date(day);
 
-    
+    return new Intl.DateTimeFormat('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    }).format(date);
+  });
+
+  let lineChart = new Chart(line, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Workout Duration In Minutes',
+          backgroundColor: 'red',
+          borderColor: 'red',
+          data: durations,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Time Spent Working Out (Last 7 days)',
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
