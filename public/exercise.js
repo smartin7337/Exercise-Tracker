@@ -14,3 +14,84 @@ const addButton = document.querySelector("button.add-another");
 const toast = document.querySelector("#toast");
 const newWorkout = document.querySelector(".new-workout")
 
+let workoutType = null;
+let shouldNavigateAway = false;
+
+async function initExercise() {
+  let workout;
+
+  if (location.search.split("=")[1] === undefined) {
+    workout = await API.createWorkout()
+    console.log(workout)
+  }
+  if (workout) {
+    location.search = "?id=" + workout._id;
+  }
+
+}
+
+initExercise();
+
+function handleWorkoutTypeChange(event) {
+  workoutType = event.target.value;
+
+  if (workoutType === "cardio") {
+    cardioForm.classList.remove("d-none");
+    resistanceForm.classList.add("d-none");
+  } else if (workoutType === "resistance") {
+    resistanceForm.classList.remove("d-none");
+    cardioForm.classList.add("d-none");
+  } else {
+    cardioForm.classList.add("d-none");
+    resistanceForm.classList.add("d-none");
+  }
+
+  validateInputs();
+}
+
+function validateInputs() {
+  let isValid = true;
+
+  if (workoutType === "resistance") {
+    if (nameInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (weightInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (setsInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (repsInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (resistanceDurationInput.value.trim() === "") {
+      isValid = false;
+    }
+  } else if (workoutType === "cardio") {
+    if (cardioNameInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (durationInput.value.trim() === "") {
+      isValid = false;
+    }
+
+    if (distanceInput.value.trim() === "") {
+      isValid = false;
+    }
+  }
+
+  if (isValid) {
+    completeButton.removeAttribute("disabled");
+    addButton.removeAttribute("disabled");
+  } else {
+    completeButton.setAttribute("disabled", true);
+    addButton.setAttribute("disabled", true);
+  }
+}
+
