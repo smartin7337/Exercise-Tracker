@@ -5,7 +5,7 @@ This project uses Mongoose shema/database and Express to deal with the routes.
 
 ![Screenshot of homepage of heroku app ](/screenshots/deployed.png)
 
-![Screenshot of homepage of it working ](/add/example.png)
+![Screenshot of homepage of it working ](/screenshots/example.png)
 
 ![Screenshot of homepage of it working ](/screenshots/addlist.png)
 
